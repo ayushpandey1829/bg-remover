@@ -1,23 +1,29 @@
 # Background Remover
 
-Ek simple Flask web app jo image ka background remove karta hai. Ye project **open source workshop** ke liye bana hai, yahan aap apna pehla Pull Request bana sakte ho.
+A simple Flask web app that removes the background from an image. It is built for an open-source workshop, so it is a good place to make your first Pull Request.
 
-Teen tareeke support hote hain:
+## Features
 
-| Method | Kaise kaam karta hai | API key? |
+- Upload an image by drag and drop or by clicking to choose a file
+- See the original and the result side by side, with the result shown on a checkerboard so transparency is visible
+- Download the result as a transparent PNG
+- Choose between three ways of removing the background:
+
+| Method | How it works | API key needed? |
 |---|---|---|
-| `rembg` | Python library, locally chalti hai | Nahi chahiye |
-| `removebg` | [remove.bg](https://www.remove.bg/api) API | Chahiye |
-| `clipdrop` | [ClipDrop](https://clipdrop.co/apis) API | Chahiye |
+| `rembg` | Python library, runs locally on your computer | No |
+| `removebg` | [remove.bg](https://www.remove.bg/api) API | Yes |
+| `clipdrop` | [ClipDrop](https://clipdrop.co/apis) API | Yes |
 
 ## Requirements
 
-- **Python 3.12** (3.13 / 3.14 par rembg ke dependencies fail ho sakte hain)
+- **Python 3.12.** Newer versions (3.13 and 3.14) may fail to install the dependencies of `rembg`.
 - Git
 
 ## Setup
 
 **Windows (PowerShell):**
+
 ```powershell
 git clone https://github.com/<USERNAME>/bg-remover.git
 cd bg-remover
@@ -28,7 +34,8 @@ pip install -r requirements.txt
 python app.py
 ```
 
-**Mac / Linux:**
+**macOS / Linux:**
+
 ```bash
 git clone https://github.com/<USERNAME>/bg-remover.git
 cd bg-remover
@@ -38,38 +45,17 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Browser me kholo: http://127.0.0.1:5000
+Then open http://127.0.0.1:5000 in your browser.
 
-## Model download (rembg)
+> The first start can take a minute or two while the libraries load. After that, it is much faster.
 
-App chhota model `u2netp` (~4 MB) use karta hai. Agar auto-download atak jaye (slow ya blocked network), to manually karo:
+## Downloading the model (rembg)
 
-1. Download: https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2netp.onnx
-2. File ko `C:\Users\<naam>\.u2net\` (Windows) ya `~/.u2net/` (Mac/Linux) me rakho.
+The app uses the small `u2netp` model (about 4 MB). It is normally downloaded automatically on first use. If the download hangs because of a slow or restricted network, download it manually:
 
-## API keys (optional)
+1. Download the file: https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2netp.onnx
+2. Place it in the following folder (create the folder if it does not exist):
+   - Windows: `C:\Users\<your-name>\.u2net\`
+   - macOS / Linux: `~/.u2net/`
 
-```bash
-cp .env.example .env     # Windows: copy .env.example .env
-```
-`.env` me keys daalo, phir server restart karo. **`.env` kabhi commit mat karna.**
-
-## Project structure
-
-```
-bg-remover/
-├── app.py                # Flask server + background removal functions
-├── templates/index.html  # Frontend (HTML + CSS + JS)
-├── requirements.txt      # Python libraries
-├── .env.example          # API keys ka sample
-├── CONTRIBUTING.md       # Contribute karne ka guide
-└── .github/              # Issue aur PR templates
-```
-
-## Contribute karna
-
-Pehle [CONTRIBUTING.md](CONTRIBUTING.md) padho, phir **Issues** tab me `good first issue` label wala koi issue chuno.
-
-## License
-
-[MIT](LICENSE)
+##
